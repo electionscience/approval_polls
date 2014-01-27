@@ -24,16 +24,16 @@ class Choice(models.Model):
 		return self.choice_text
 
 #TODO: Use these to better-track who's voting
-class Ballot(models.Model):
-	poll = models.ForeignKey(Poll)
-	timestamp = models.DateTimeField('time voted')
-	ip = models.GenericIPAddressField()
-	def __unicode__(self):
-		return self.ip + " at " + self.timestamp
-
-class Vote(models.Model):
-	ballot = models.ForeignKey(Ballot)
-	choice = models.ForeignKey(Choice)
-	def __unicode__(self):
-		return self.ballot + " for " + self.choice
+#class Ballot(models.Model):
+#	poll = models.ForeignKey(Poll)
+#	timestamp = models.DateTimeField('time voted')
+#	ip = models.GenericIPAddressField()
+#	def __unicode__(self):
+#		return self.ip + " at " + self.timestamp
+#
+#class Vote(models.Model):
+#	ballot = models.ForeignKey(Ballot)
+#	choice = models.ForeignKey(Choice)
+#	def __unicode__(self):
+#		return self.ballot + " for " + self.choice
 
