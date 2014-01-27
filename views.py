@@ -5,7 +5,7 @@ from django.views import generic
 from django.utils import timezone
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-from approvalPolls.models import Poll, Choice
+from approval_polls.models import Poll, Choice
 
 def index(request):
     poll_list = Poll.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
@@ -17,18 +17,18 @@ def index(request):
         polls = paginator.page(1)
     except EmptyPage:
         polls = paginator.page(paginator.num_pages)
-    return render(request, 'approvalPolls/index.html', {"latest_poll_list":polls})
+    return render(request, 'approval_polls/index.html', {"latest_poll_list":polls})
 
 class DetailView(generic.DetailView):
     model = Poll
-    template_name = 'approvalPolls/detail.html'
+    template_name = 'approval_polls/detail.html'
     def get_queryset(self):
         """Exclude any polls that aren't published yet."""
         return Poll.objects.filter(pub_date__lte=timezone.now())
 
 class ResultsView(generic.DetailView):
     model = Poll
-    template_name = 'approvalPolls/results.html'
+    template_name = 'approval_polls/results.html'
 
 def vote(request, poll_id):
     p = get_object_or_404(Poll, pk=poll_id)
@@ -42,10 +42,10 @@ def vote(request, poll_id):
 		choice.save()
     p.ballots += 1
     p.save()
-    return HttpResponseRedirect(reverse('approvalPolls:results', args=(p.id,)))
+    return HttpResponseRedirect(reverse('approval_polls:results', args=(p.id,)))
 
 class CreateView(generic.base.TemplateView):
-    template_name = 'approvalPolls/create.html'
+    template_name = 'approval_polls/create.html'
 
 def created(request):
     #if question exists and is not blank, create a new poll p
@@ -69,4 +69,4 @@ def created(request):
         c += 1
 
     #redirect to detail page of your new poll
-    return HttpResponseRedirect(reverse('approvalPolls:detail', args=(p.id,)))
+    return HttpResponseRedirect(reverse('approval_polls:detail', args=(p.id,)))

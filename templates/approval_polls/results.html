@@ -12,6 +12,6 @@
 {% endblock %}
 
 {% block footer %}
-<div align="center"><p><a href="{% url 'approvalPolls:detail' poll.id %}">Vote again?</a></p></div>
-<p><a href="{% url 'approvalPolls:index' %}">More Polls</a></p>
+<div align="center"><p><a href="{% url 'approval_polls:detail' poll.id %}">Vote again?</a></p></div>
+<p><a href="{% url 'approval_polls:index' %}">More Polls</a></p>
 {% endblock %}

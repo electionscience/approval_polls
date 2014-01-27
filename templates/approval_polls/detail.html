@@ -5,7 +5,7 @@
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-<form action="{% url 'approvalPolls:vote' poll.id %}" method="post">
+<form action="{% url 'approval_polls:vote' poll.id %}" method="post">
 {% csrf_token %}
 {% for choice in poll.choice_set.all %}
     <input type="checkbox" name="choice{{ forloop.counter }}" id="choice{{ forloop.counter }}" />
@@ -16,6 +16,6 @@
 {% endblock %}
 
 {% block footer %}
-<div align="center"><p><a href="{% url 'approvalPolls:results' poll.id %}">See Results</a></p></div>
-<p><a href="{% url 'approvalPolls:index' %}">More Polls</a></p>
+<div align="center"><p><a href="{% url 'approval_polls:results' poll.id %}">See Results</a></p></div>
+<p><a href="{% url 'approval_polls:index' %}">More Polls</a></p>
 {% endblock %}

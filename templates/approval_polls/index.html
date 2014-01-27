@@ -4,7 +4,7 @@
 {% if latest_poll_list %}
     <ul>
     {% for poll in latest_poll_list %}
-        <li><a href="{% url 'approvalPolls:detail' poll.id %}">{{ poll.question }}</a></li>
+        <li><a href="{% url 'approval_polls:detail' poll.id %}">{{ poll.question }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
@@ -24,6 +24,6 @@
         {% endif %}
     </p></div>	
 {% endif %}
-<p><a href="{% url 'approvalPolls:create' %}">Create a Poll</a></p>
+<p><a href="{% url 'approval_polls:create' %}">Create a Poll</a></p>
 {% endblock footer %}
 

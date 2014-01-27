@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<form action="{% url 'approvalPolls:created' %}" method="post">
+<form action="{% url 'approval_polls:created' %}" method="post">
 {% csrf_token %}
 <h3>Poll Question</h3>
 <input type="text" maxlength="200" name="question" size="28" />
