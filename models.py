@@ -5,10 +5,7 @@ class Poll(models.Model):
 	pub_date = models.DateTimeField('date published')
 	ballots = models.IntegerField(default=0)
 	def total_votes(self):
-		v = 0
-		for c in self.choice_set.all():
-			v += c.votes
-		return v
+		return sum(c.votes for c in self.choice_set.all())
 	def __unicode__(self):
 		return self.question
 
@@ -17,9 +14,7 @@ class Choice(models.Model):
 	choice_text = models.CharField(max_length=200)
 	votes = models.IntegerField(default=0)
 	def percentage(self):
-		if self.poll.ballots == 0:
-			return 0
-		return self.votes*100/self.poll.ballots
+		return 0 if self.poll.ballots == 0 else self.votes*100/self.poll.ballots
 	def __unicode__(self):
 		return self.choice_text
 
