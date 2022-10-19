@@ -33,13 +33,13 @@ class ResultsView(generic.DetailView):
 def vote(request, poll_id):
     p = get_object_or_404(Poll, pk=poll_id)
     for counter,choice in enumerate(p.choice_set.all()):
-	try:
-		request.POST['choice'+str(counter+1)]
-	except (KeyError):
-		pass
-	else:
-		choice.votes += 1
-		choice.save()
+        try:
+            request.POST[f'choice{str(counter + 1)}']
+        except (KeyError):
+        	pass
+        else:
+            choice.votes += 1
+            choice.save()
     p.ballots += 1
     p.save()
     return HttpResponseRedirect(reverse('approval_polls:results', args=(p.id,)))
